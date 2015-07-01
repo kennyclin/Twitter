@@ -11,6 +11,7 @@
 #import "TweetCell.h"
 #import "TwitterClient.h"
 #import "NewTweetController.h"
+#import "TweetDetailViewController.h"
 
 @interface TweetViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -35,7 +36,7 @@
     
     [self.navigationItem setLeftBarButtonItem:self.signOutButton];
     [self.navigationItem setRightBarButtonItem:self.myTweetButton];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:nil action:nil];
+    //self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDon/e target:nil action:nil];
     
     [[TwitterClient sharedInstance] homeTimelineWithParams:nil completion:^(NSArray *tweets, NSError *error) {
         if (tweets!=nil){
@@ -76,6 +77,11 @@
     return cell;
 }
 
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TweetDetailViewController *vc = [[TweetDetailViewController alloc] init];
+    vc.tweetModel = self.homeTweets[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 /*
 #pragma mark - Navigation

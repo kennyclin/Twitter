@@ -65,7 +65,7 @@
     self.retweetedBy.text=@"";
     self.userName.text=user.name;
     self.userAlias.text=[NSString stringWithFormat:@"@%@", user.screenname];
-    self.createTime.text=@"14h";
+    self.createTime.text=[tweetModel getDisplayTime];
     self.text.text=tweetModel.text;
     
     

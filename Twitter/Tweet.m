@@ -20,6 +20,9 @@
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"EEE MMM d HH:mm:ss Z y";
         self.createdAt = [formatter dateFromString:createdAtString];
+        self.retweetNo = [dictionary[@"retweet_count"] intValue];
+        self.favoriteNo = [dictionary[@"favorite_count"] intValue];
+        NSLog(@"favorite count: %@", dictionary[@"favorite_count"]);
     }
     return self;
 }
@@ -31,6 +34,18 @@
         [result addObject:tweet];
     }
     return result;
+}
+
+-(NSString*) getDisplayTime{
+    NSDate *now = [[NSDate alloc] init];
+    NSTimeInterval since = [now timeIntervalSinceDate:self.createdAt];
+    int hours = (int) since/3600;
+    if (hours>24){
+        NSDateFormatter *ymd = [[NSDateFormatter alloc] init];
+        ymd.dateFormat = @"M/d/yy";
+        return [ymd stringFromDate:self.createdAt];
+    } else return [NSString stringWithFormat:@"%dh", hours];
+    
 }
 
 @end
