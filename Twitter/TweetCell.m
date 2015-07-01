@@ -20,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *userAlias;
 @property (weak, nonatomic) IBOutlet UILabel *createTime;
 @property (weak, nonatomic) IBOutlet UILabel *text;
+@property (weak, nonatomic) IBOutlet UIImageView *replyImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *retweetImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *favImageView;
 
 /*
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageURL;
@@ -39,6 +42,10 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    UITapGestureRecognizer *favTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDected)];
+    favTap.numberOfTapsRequired=1;
+    [self.favImageView setUserInteractionEnabled:YES];
+    [self.favImageView addGestureRecognizer:favTap];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -47,17 +54,23 @@
     // Configure the view for the selected state
 }
 
+-(void) tapDected {
+    NSLog(@"favorite tapped!!! id: %@", _tweetModel.id);
+}
+
 - (void) setTweetModel:(Tweet *)tweetModel {
     _tweetModel=tweetModel;
     User *user=self.tweetModel.user;
     [self.profileImageURL setImageWithURL:[NSURL URLWithString:user.profileImageUrl]];
     self.retweetedBy.text=@"";
     self.userName.text=user.name;
-    self.userAlias.text=[NSString stringWithFormat:@"#%@", user.screenname];
+    self.userAlias.text=[NSString stringWithFormat:@"@%@", user.screenname];
     self.createTime.text=@"14h";
     self.text.text=tweetModel.text;
     
     
 }
+
+
 
 @end

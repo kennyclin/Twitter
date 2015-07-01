@@ -10,9 +10,12 @@
 #import "User.h"
 #import "TweetCell.h"
 #import "TwitterClient.h"
+#import "NewTweetController.h"
 
 @interface TweetViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIBarButtonItem *signOutButton;
+@property (strong, nonatomic) UIBarButtonItem *myTweetButton;
 
 @property (strong, nonatomic) NSArray *homeTweets;
 
@@ -26,6 +29,13 @@
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:nil] forCellReuseIdentifier:@"TweetCell"];
+    [self.navigationItem setTitle:@"Home"];
+    self.signOutButton=[[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(doLogout)];
+    self.myTweetButton=[[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(myNewTweet)];
+    
+    [self.navigationItem setLeftBarButtonItem:self.signOutButton];
+    [self.navigationItem setRightBarButtonItem:self.myTweetButton];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:nil action:nil];
     
     [[TwitterClient sharedInstance] homeTimelineWithParams:nil completion:^(NSArray *tweets, NSError *error) {
         if (tweets!=nil){
@@ -37,6 +47,14 @@
         
     }];
         
+}
+
+-(void) doLogout {
+    [User logout];
+}
+
+-(void) myNewTweet {
+    [self.navigationController pushViewController:[[NewTweetController alloc] init] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

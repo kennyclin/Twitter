@@ -15,18 +15,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="PTb-fZ-4Nd">
-                    <rect key="frame" x="0.0" y="20" width="316" height="548"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="PTb-fZ-4Nd">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="PTb-fZ-4Nd" secondAttribute="bottom" id="56h-Va-lXM"/>
-                <constraint firstItem="PTb-fZ-4Nd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AsG-bp-tUX"/>
-                <constraint firstItem="PTb-fZ-4Nd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="hbe-XX-eEu"/>
-                <constraint firstAttribute="trailing" secondItem="PTb-fZ-4Nd" secondAttribute="trailing" constant="4" id="xhp-Fl-0Yf"/>
-            </constraints>
             <point key="canvasLocation" x="231" y="324"/>
         </view>
     </objects>

@@ -33,7 +33,7 @@
     if (user != nil){
         NSLog(@"Welcome back again, %@", user.name);
         TweetViewController *tweetController =[[TweetViewController alloc] init];
-        [tweetController.navigationItem setTitle:@"Home"];
+        
         self.navigation= [[UINavigationController alloc] initWithRootViewController:tweetController];
         
        // self.window.rootViewController= [[TweetViewController alloc] init];

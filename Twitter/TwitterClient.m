@@ -82,5 +82,38 @@ NSString const *TwitterBaseURL=@"https://api.twitter.com";
     }];
 }
 
+- (void) updateStatus:(Tweet *) tweet completion:(void (^) (NSError* error)) completion {
+    NSMutableDictionary *dict=[[NSMutableDictionary alloc] init];
+    [dict setObject:tweet.text forKey:@"status"];
+    [self POST:@"1.1/statuses/update.json" parameters:dict constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            completion(nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            completion(error);
+        }];
+}
 
+- (void) retweet:(NSString *) idStr completion:(void (^) (NSError* error)) completion{
+    NSString *url = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", idStr];
+    [self GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"retweet done!");
+        completion(nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed to retweet!");
+        completion(error);
+    }];
+}
+
+- (void) setFavorite:(NSString *) idStr completion:(void (^) (NSError* error)) completion{
+    NSString *url = [NSString stringWithFormat:@"1.1/favorites/create.json?id=%@", idStr];
+    [self GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"favorite set!");
+        completion(nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed to retweet!");
+        completion(error);
+    }];
+}
+/*
+- (void) reply:(Tweet *) tweet completion:(void (^) (NSError* error)) completion;
+ */
 @end
