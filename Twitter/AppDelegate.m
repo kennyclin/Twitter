@@ -35,6 +35,10 @@
         TweetViewController *tweetController =[[TweetViewController alloc] init];
         
         self.navigation= [[UINavigationController alloc] initWithRootViewController:tweetController];
+        self.navigation.navigationBar.barTintColor = [UIColor colorWithRed:79.0f/255.f green:180.0f/255.0f blue:1.0f alpha:1.0f];
+        self.navigation.navigationBar.tintColor = [UIColor whiteColor];
+        [self.navigation.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+        
         
        // self.window.rootViewController= [[TweetViewController alloc] init];
         self.window.rootViewController= self.navigation;

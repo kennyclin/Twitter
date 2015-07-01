@@ -30,7 +30,7 @@
     self.nameLabel.text = currentUser.name;
     self.aliasLabel.text = [NSString stringWithFormat:@"@%@", currentUser.screenname];
     self.submit = [[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStylePlain target:self action:@selector(doSubmit)];
-   self.wordCount = [[UIBarButtonItem alloc] initWithTitle:@"140" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.wordCount = [[UIBarButtonItem alloc] initWithTitle:@"140" style:UIBarButtonItemStylePlain target:nil action:nil];
    // self.wordCount = [[UILabel alloc] init];
     //[self.wordCount setText:@"140"];
    // self.wordCount .alpha=0.5;
@@ -40,8 +40,6 @@
     [buttonArray addObject:self.wordCount];
     
     [self.navigationItem setRightBarButtonItems:buttonArray];
-
-    
     
 }
 -(void) doSubmit {
@@ -52,6 +50,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

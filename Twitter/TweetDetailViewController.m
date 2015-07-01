@@ -9,6 +9,8 @@
 #import "TweetDetailViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "User.h"
+#import "TwitterClient.h"
+#import "NewTweetController.h"
 
 @interface TweetDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -23,6 +25,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *retweetImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *favImageView;
 
+@property (strong, nonatomic) UIBarButtonItem *replyButton;
+@property (strong, nonatomic) UIBarButtonItem *backHome;
+
 @end
 
 @implementation TweetDetailViewController
@@ -31,11 +36,23 @@
     [super viewDidLoad];
     NSLog(@"Now here");
     [self setTweetModel:self.tweetModel];
+    [self.navigationItem setTitle:@"Tweet"];
+    self.replyButton=[[UIBarButtonItem alloc] initWithTitle:@"Reply" style:UIBarButtonItemStylePlain target:self action:@selector(replyTweet)];
+    [self.navigationItem setRightBarButtonItem:self.replyButton];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) replyTweet {
+    [[TwitterClient sharedInstance] reply:self.tweetModel completion:^(NSError *error) {
+        if (error == nil){
+            self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
+             [self.navigationController pushViewController:[[NewTweetController alloc] init] animated:YES];
+        }
+    }];
 }
 
 - (void) setTweetModel:(Tweet *)tweetModel {
@@ -45,7 +62,7 @@
     self.nameLabel.text=user.name;
     self.aliasLabel.text=[NSString stringWithFormat:@"@%@", user.screenname];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"EEE MMM d HH:mm:ss Z y";
+    formatter.dateFormat = @"M/d/yy, hh:mm aaa";
     self.tweetTimeLabel.text = [formatter stringFromDate:tweetModel.createdAt];
     self.textLabel.text=tweetModel.text;
     self.tweetNoLabel.text=[NSString stringWithFormat:@"%d", tweetModel.retweetNo];

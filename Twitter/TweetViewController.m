@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIBarButtonItem *signOutButton;
 @property (strong, nonatomic) UIBarButtonItem *myTweetButton;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @property (strong, nonatomic) NSArray *homeTweets;
 
@@ -31,6 +32,8 @@
     self.tableView.delegate=self;
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:nil] forCellReuseIdentifier:@"TweetCell"];
     [self.navigationItem setTitle:@"Home"];
+    
+    
     self.signOutButton=[[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(doLogout)];
     self.myTweetButton=[[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(myNewTweet)];
     
@@ -38,6 +41,25 @@
     [self.navigationItem setRightBarButtonItem:self.myTweetButton];
     //self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDon/e target:nil action:nil];
     
+    [self refreshRemoteData];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(onRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+
+        
+}
+
+-(void) doLogout {
+    [User logout];
+}
+
+-(void) myNewTweet {
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.navigationItem setBackBarButtonItem:cancelButton];
+    [self.navigationController pushViewController:[[NewTweetController alloc] init] animated:YES];
+}
+
+-(void) refreshRemoteData {
     [[TwitterClient sharedInstance] homeTimelineWithParams:nil completion:^(NSArray *tweets, NSError *error) {
         if (tweets!=nil){
             self.homeTweets=tweets;
@@ -47,16 +69,13 @@
         }
         
     }];
-        
 }
 
--(void) doLogout {
-    [User logout];
+-(void) onRefresh {
+    [self refreshRemoteData];
+    [self.refreshControl endRefreshing];
 }
 
--(void) myNewTweet {
-    [self.navigationController pushViewController:[[NewTweetController alloc] init] animated:YES];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -80,6 +99,7 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetDetailViewController *vc = [[TweetDetailViewController alloc] init];
     vc.tweetModel = self.homeTweets[indexPath.row];
+    [self.navigationItem.backBarButtonItem setTitle:@"Home"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
