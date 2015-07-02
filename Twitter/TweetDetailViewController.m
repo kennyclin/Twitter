@@ -68,6 +68,11 @@
     self.tweetNoLabel.text=[NSString stringWithFormat:@"%d", tweetModel.retweetNo];
     self.favoriteNoLabel.text=[NSString stringWithFormat:@"%d", tweetModel.favoriteNo];
     
+    if (tweetModel.favorited){
+        self.favImageView.image = [UIImage imageNamed:@"twitter-favon-icon"];
+    } else {
+        self.favImageView.image = [UIImage imageNamed:@"star_fav"];
+    }
     
 }
 

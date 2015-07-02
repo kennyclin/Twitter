@@ -10,6 +10,7 @@
 #import "Tweet.h"
 #import "UIImageView+AFNetworking.h"
 #import "User.h"
+#import "TwitterClient.h"
 
 @interface TweetCell()
 
@@ -42,10 +43,16 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    UITapGestureRecognizer *favTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDected)];
+    UITapGestureRecognizer *favTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(favDected)];
     favTap.numberOfTapsRequired=1;
     [self.favImageView setUserInteractionEnabled:YES];
     [self.favImageView addGestureRecognizer:favTap];
+    
+    UITapGestureRecognizer *retweetTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(retweetDected)];
+    retweetTap.numberOfTapsRequired=1;
+    [self.retweetImageView setUserInteractionEnabled:YES];
+    [self.retweetImageView addGestureRecognizer:retweetTap];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -54,8 +61,25 @@
     // Configure the view for the selected state
 }
 
--(void) tapDected {
+
+-(void) favDected {
     NSLog(@"favorite tapped!!! id: %@", _tweetModel.id);
+    [[TwitterClient sharedInstance] setFavorite:_tweetModel.id completion:^(NSError *error) {
+        if (error != NULL){
+            _tweetModel.favorited=YES;
+            [self setTweetModel:_tweetModel];
+        } else {
+            NSLog(@"failed to set favorite %@", error);
+        }
+    }];
+}
+
+-(void) retweetDected {
+    [[TwitterClient sharedInstance] retweet:_tweetModel.id completion:^(NSError *error) {
+        if (error != NULL){
+            NSLog(@"retweeted!");
+        }
+    }];
 }
 
 - (void) setTweetModel:(Tweet *)tweetModel {
@@ -67,7 +91,11 @@
     self.userAlias.text=[NSString stringWithFormat:@"@%@", user.screenname];
     self.createTime.text=[tweetModel getDisplayTime];
     self.text.text=tweetModel.text;
-    
+    if (tweetModel.favorited){
+        self.favImageView.image = [UIImage imageNamed:@"twitter-favon-icon"];
+    } else {
+        self.favImageView.image = [UIImage imageNamed:@"star_fav"];
+    }
     
 }
 

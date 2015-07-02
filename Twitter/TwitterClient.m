@@ -95,7 +95,7 @@ NSString const *TwitterBaseURL=@"https://api.twitter.com";
 
 - (void) retweet:(NSString *) idStr completion:(void (^) (NSError* error)) completion{
     NSString *url = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", idStr];
-    [self GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"retweet done!");
         completion(nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -106,11 +106,11 @@ NSString const *TwitterBaseURL=@"https://api.twitter.com";
 
 - (void) setFavorite:(NSString *) idStr completion:(void (^) (NSError* error)) completion{
     NSString *url = [NSString stringWithFormat:@"1.1/favorites/create.json?id=%@", idStr];
-    [self GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"favorite set!");
         completion(nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failed to retweet!");
+        NSLog(@"failed to set favorite! %@", error);
         completion(error);
     }];
 }

@@ -22,6 +22,7 @@
         self.createdAt = [formatter dateFromString:createdAtString];
         self.retweetNo = [dictionary[@"retweet_count"] intValue];
         self.favoriteNo = [dictionary[@"favorite_count"] intValue];
+        self.favorited = [dictionary[@"favorited"] boolValue];
        // NSLog(@"favorite count: %@", dictionary[@"favorite_count"]);
     }
     return self;

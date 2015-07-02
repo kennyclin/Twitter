@@ -101,6 +101,7 @@
     vc.tweetModel = self.homeTweets[indexPath.row];
     [self.navigationItem.backBarButtonItem setTitle:@"Home"];
     [self.navigationController pushViewController:vc animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 /*
