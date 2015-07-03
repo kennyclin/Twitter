@@ -27,5 +27,5 @@ Time spent: 15 hours
 
 ### Walkthrough
 
-![Video Walkthrough]((https://github.com/kennyclin/Twitter/blob/master/demo.gif))
+![Video Walkthrough](https://github.com/kennyclin/Twitter/blob/master/demo.gif)
 
