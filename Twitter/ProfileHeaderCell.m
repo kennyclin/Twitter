@@ -12,6 +12,7 @@
 
 @interface ProfileHeaderCell()
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *aliasLabel;
@@ -36,6 +37,7 @@
 - (void)setUser:(User *)user {
     
     [self.profileImageView setImageWithURL:[NSURL URLWithString:user.profileImageUrl]];
+    [self.bgImageView setImageWithURL: [NSURL URLWithString:user.backgroundImageUrl]];
     
     self.nameLabel.text = user.name;
     self.aliasLabel.text = [NSString stringWithFormat:@"@%@", user.screenname];
