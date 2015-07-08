@@ -11,6 +11,7 @@
 #import "TweetViewController.h"
 #import "User.h"
 #import "TwitterClient.h"
+#import "MenuViewController.h"
 
 @interface AppDelegate ()
 
@@ -32,16 +33,21 @@
     User *user = [User currentUser];
     if (user != nil){
         NSLog(@"Welcome back again, %@", user.name);
-        TweetViewController *tweetController =[[TweetViewController alloc] init];
         
-        self.navigation= [[UINavigationController alloc] initWithRootViewController:tweetController];
+        //TweetViewController *tweetController =[[TweetViewController alloc] init];
+        
+        MenuViewController *menuController = [[MenuViewController alloc] init];
+       
+        /*
+        self.navigation= [[UINavigationController alloc] initWithRootViewController:menuController];
         self.navigation.navigationBar.barTintColor = [UIColor colorWithRed:79.0f/255.f green:180.0f/255.0f blue:1.0f alpha:1.0f];
         self.navigation.navigationBar.tintColor = [UIColor whiteColor];
         [self.navigation.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
         
         
-       // self.window.rootViewController= [[TweetViewController alloc] init];
         self.window.rootViewController= self.navigation;
+         */
+        self.window.rootViewController = menuController;
     } else {
         NSLog(@"Not logged in");
         self.window.rootViewController= [[LoginController alloc] init];

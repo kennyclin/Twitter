@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TweetCell.h"
+#import "User.h"
 
-@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, TweetCellDelegate>
+
+@property (strong, nonatomic) User *user;
 
 @end

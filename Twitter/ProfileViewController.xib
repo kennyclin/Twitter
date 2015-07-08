@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController">
             <connections>
+                <outlet property="bgImageView" destination="gmS-YR-Anm" id="AGN-wg-z5Q"/>
+                <outlet property="tableView" destination="AoC-PB-2kP" id="FIy-85-lAw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

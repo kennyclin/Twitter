@@ -7,6 +7,8 @@
 //
 
 #import "ProfileHeaderCell.h"
+#import "User.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ProfileHeaderCell()
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -29,6 +31,21 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setUser:(User *)user {
+    
+    [self.profileImageView setImageWithURL:[NSURL URLWithString:user.profileImageUrl]];
+    
+    self.nameLabel.text = user.name;
+    self.aliasLabel.text = [NSString stringWithFormat:@"@%@", user.screenname];
+    
+    
+    // use friendly numbers like twitter
+    self.tweetNoLabel.text =  [NSString stringWithFormat:@"%d", user.tweetNo ];
+    self.followingLabel.text = [NSString stringWithFormat:@"%d", user.followingNo];
+    self.followerLabel.text = [NSString stringWithFormat:@"%d", user.followerNo];
+    
 }
 
 @end

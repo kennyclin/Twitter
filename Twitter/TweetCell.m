@@ -43,15 +43,22 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    UITapGestureRecognizer *favTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(favDected)];
+    UITapGestureRecognizer *favTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(favDetected)];
     favTap.numberOfTapsRequired=1;
     [self.favImageView setUserInteractionEnabled:YES];
     [self.favImageView addGestureRecognizer:favTap];
     
-    UITapGestureRecognizer *retweetTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(retweetDected)];
+    UITapGestureRecognizer *retweetTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(retweetDetected)];
     retweetTap.numberOfTapsRequired=1;
     [self.retweetImageView setUserInteractionEnabled:YES];
     [self.retweetImageView addGestureRecognizer:retweetTap];
+    
+    UITapGestureRecognizer *profileTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileDetected)];
+    profileTap.numberOfTapsRequired=1;
+    [self.profileImageURL setUserInteractionEnabled:YES];
+    [self.profileImageURL addGestureRecognizer:profileTap];
+    
+    
     
 }
 
@@ -62,7 +69,7 @@
 }
 
 
--(void) favDected {
+-(void) favDetected {
     NSLog(@"favorite tapped!!! id: %@", _tweetModel.id);
     [[TwitterClient sharedInstance] setFavorite:_tweetModel.id completion:^(NSError *error) {
         if (error != NULL){
@@ -74,7 +81,12 @@
     }];
 }
 
--(void) retweetDected {
+- (void) profileDetected {
+    NSLog(@"profile image tapped! %@", _tweetModel.user);
+    [self.delegate onProfile:_tweetModel.user];
+}
+
+-(void) retweetDetected {
     [[TwitterClient sharedInstance] retweet:_tweetModel.id completion:^(NSError *error) {
         if (error != NULL){
             NSLog(@"retweeted!");

@@ -9,8 +9,9 @@
 #import "MenuViewController.h"
 #import "ProfileViewController.h"
 #import "TweetViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface MenuViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MenuViewController () 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerXConstraint;
@@ -18,12 +19,20 @@
 
 @property (strong, nonatomic) UIViewController *currentVC;
 @property (strong, nonatomic) ProfileViewController *profileVC;
+@property (strong, nonatomic) UINavigationController *profileNC;
 @property (strong, nonatomic) TweetViewController *tweetsVC;
+@property (strong, nonatomic) UINavigationController *tweetsNC;
+
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *swipeRightGR;
+
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *swipeLeftGR;
 
 
 @end
 
 @implementation MenuViewController
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,24 +42,24 @@
     
     // Profile View
     self.profileVC = [[ProfileViewController alloc] init];
-    //UINavigationController *pnvc = [[UINavigationController alloc] initWithRootViewController:self.profileVC];
-   /*pnvc.navigationBar.barTintColor = [UIColor colorWithRed:85/255.0f green:172/255.0f blue:238/255.0f alpha:1.0f];
-    pnvc.navigationBar.tintColor = [UIColor whiteColor];
-    [pnvc.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    pnvc.navigationBar.translucent = NO;
-   */
+    self.profileNC = [[UINavigationController alloc] initWithRootViewController:self.profileVC];
+    self.profileNC.navigationBar.barTintColor = [UIColor colorWithRed:85/255.0f green:172/255.0f blue:238/255.0f alpha:1.0f];
+    self.profileNC.navigationBar.tintColor = [UIColor whiteColor];
+    [self.profileNC.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.profileNC.navigationBar.translucent = NO;
+   
     // set self as delage for pull downs
     //pvc.delegate = self;
     
     // Timeline
     self.tweetsVC = [[TweetViewController alloc] init];
-    /*
-    UINavigationController *tnvc = [[UINavigationController alloc] initWithRootViewController:tvc];
-    tnvc.navigationBar.barTintColor = [UIColor colorWithRed:85/255.0f green:172/255.0f blue:238/255.0f alpha:1.0f];
-    tnvc.navigationBar.tintColor = [UIColor whiteColor];
-    [tnvc.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    tnvc.navigationBar.translucent = NO;
-    */
+    
+    self.tweetsNC = [[UINavigationController alloc] initWithRootViewController:self.tweetsVC];
+    self.tweetsNC.navigationBar.barTintColor = [UIColor colorWithRed:85/255.0f green:172/255.0f blue:238/255.0f alpha:1.0f];
+    self.tweetsNC.navigationBar.tintColor = [UIColor whiteColor];
+    [self.tweetsNC.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.tweetsNC.navigationBar.translucent = NO;
+    
     
     // Mentions
     /*
@@ -63,7 +72,7 @@
     */
     
     // set profile as initial view
-    self.currentVC = self.tweetsVC; // fixed me
+    self.currentVC = self.tweetsNC; // fixed me
     self.currentVC.view.frame = self.contentView.bounds;
     [self.contentView addSubview:self.currentVC.view];
     
@@ -80,10 +89,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row){
         case 0:
-            self.currentVC = self.profileVC;
+            self.currentVC = self.profileNC;
             break;
         case 1:
-            self.currentVC = self.tweetsVC;
+            self.currentVC = self.tweetsNC;
             break;
         case 2:
             break;
@@ -110,20 +119,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
+    cell.imageView.frame = CGRectMake(cell.imageView.frame.origin.x,
+                                      cell.imageView.frame.origin.y,
+                                      80, 80);
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.imageView.clipsToBounds = YES;
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = @"Profile";
+            cell.imageView.image = [UIImage imageNamed:@"profile-icon"];
+            //cell.textLabel.text = @"Profile";
             break;
         case 1:
-            cell.textLabel.text = @"Timeline";
+            cell.imageView.image = [UIImage imageNamed:@"timeline-icon"];
+           // cell.textLabel.text = @"Timeline";
             break;
         case 2:
-            cell.textLabel.text = @"Mentions";
+            cell.imageView.image = [UIImage imageNamed:@"mentions-icon"];
+            //cell.textLabel.text = @"Mentions";
             break;
     }
     
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
-    cell.textLabel.textColor = [UIColor whiteColor];
+    //cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12];
+   // cell.textLabel.textColor = [UIColor whiteColor];
     // use twitter color https://about.twitter.com/press/brand-assets
     cell.backgroundColor = [UIColor colorWithRed:85/255.0f green:172/255.0f blue:238/255.0f alpha:1.0f];
     
@@ -135,10 +152,11 @@
     // reload data to handle height change since row heights are based on table height
     [self.tableView reloadData];
     [UIView animateWithDuration:.24 animations:^{
-        self.centerXConstraint.constant = -200;
+        self.centerXConstraint.constant = -60;
         [self.view layoutIfNeeded];
     }];
 }
+
 
 - (IBAction)didSwipeLeft:(id)sender {
     NSLog(@"Swipe left detected");

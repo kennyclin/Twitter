@@ -49,7 +49,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfQ-KO-Fvm">
-                        <rect key="frame" x="201" y="169" width="95" height="16"/>
+                        <rect key="frame" x="195.5" y="169" width="95" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="95" id="69h-Wh-RDI"/>
                         </constraints>
@@ -67,7 +67,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="834" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtZ-lC-b8M">
-                        <rect key="frame" x="201" y="136" width="25.5" height="24"/>
+                        <rect key="frame" x="195" y="136" width="25.5" height="24"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -85,15 +85,18 @@
                     <constraint firstItem="fOi-BH-FzW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="19" id="5Yt-6S-gMb"/>
                     <constraint firstItem="ZEn-QN-gkX" firstAttribute="leading" secondItem="VtZ-lC-b8M" secondAttribute="trailing" constant="110.5" id="76E-pj-CnS"/>
                     <constraint firstItem="4fS-db-Np0" firstAttribute="top" secondItem="Slx-VH-vbj" secondAttribute="bottom" constant="8" id="9Nq-LY-ewZ"/>
+                    <constraint firstItem="ZEn-QN-gkX" firstAttribute="leading" secondItem="yMm-5q-gG8" secondAttribute="leading" id="BJ4-9H-hwT"/>
                     <constraint firstAttribute="trailingMargin" secondItem="yMm-5q-gG8" secondAttribute="trailing" constant="9" id="DMa-uV-IJs"/>
                     <constraint firstItem="yMm-5q-gG8" firstAttribute="centerY" secondItem="jfQ-KO-Fvm" secondAttribute="centerY" id="FFG-lj-3o2"/>
                     <constraint firstItem="5i6-tq-OBn" firstAttribute="top" secondItem="4fS-db-Np0" secondAttribute="bottom" constant="8.5" id="Na4-I9-VvO"/>
                     <constraint firstItem="ZEn-QN-gkX" firstAttribute="centerY" secondItem="VtZ-lC-b8M" secondAttribute="centerY" id="TzF-2o-p8z"/>
                     <constraint firstItem="8wa-T5-syF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="19" id="XG3-jp-iJS"/>
+                    <constraint firstAttribute="centerX" secondItem="jfQ-KO-Fvm" secondAttribute="centerX" id="azV-hi-lEs"/>
                     <constraint firstItem="4fS-db-Np0" firstAttribute="centerX" secondItem="Slx-VH-vbj" secondAttribute="centerX" id="b0P-9e-fQo"/>
                     <constraint firstAttribute="centerX" secondItem="Slx-VH-vbj" secondAttribute="centerX" id="bLx-5x-XVk"/>
                     <constraint firstItem="Slx-VH-vbj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="ced-cT-nFf"/>
                     <constraint firstItem="yMm-5q-gG8" firstAttribute="leading" secondItem="jfQ-KO-Fvm" secondAttribute="trailing" constant="86" id="cgH-iy-Q6V"/>
+                    <constraint firstItem="VtZ-lC-b8M" firstAttribute="leading" relation="lessThanOrEqual" secondItem="8wa-T5-syF" secondAttribute="trailing" constant="156" id="dEo-JM-Uj7"/>
                     <constraint firstItem="VtZ-lC-b8M" firstAttribute="leading" secondItem="8wa-T5-syF" secondAttribute="trailing" constant="45.5" id="hVC-NA-CSl"/>
                     <constraint firstItem="jfQ-KO-Fvm" firstAttribute="top" secondItem="VtZ-lC-b8M" secondAttribute="bottom" constant="9" id="hjb-O6-KPA"/>
                     <constraint firstItem="fOi-BH-FzW" firstAttribute="top" secondItem="8wa-T5-syF" secondAttribute="bottom" constant="12" id="iK7-3m-wKm"/>
@@ -103,18 +106,27 @@
                     <constraint firstItem="fOi-BH-FzW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="19" id="nHt-F2-pP7"/>
                     <constraint firstAttribute="centerX" secondItem="5i6-tq-OBn" secondAttribute="centerX" id="ngJ-rA-dlU"/>
                     <constraint firstItem="VtZ-lC-b8M" firstAttribute="leading" secondItem="8wa-T5-syF" secondAttribute="trailing" constant="45.5" id="qKy-jL-Jgx"/>
+                    <constraint firstItem="VtZ-lC-b8M" firstAttribute="leading" secondItem="jfQ-KO-Fvm" secondAttribute="leading" id="qPT-uE-NF2"/>
                     <constraint firstItem="jfQ-KO-Fvm" firstAttribute="leading" secondItem="fOi-BH-FzW" secondAttribute="trailing" constant="125" id="som-nc-XS1"/>
                     <constraint firstItem="8wa-T5-syF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="139" id="vuu-9P-DZW"/>
                     <constraint firstItem="ZEn-QN-gkX" firstAttribute="leading" secondItem="yMm-5q-gG8" secondAttribute="leading" id="wXA-dj-ky9"/>
                     <constraint firstItem="8wa-T5-syF" firstAttribute="centerY" secondItem="VtZ-lC-b8M" secondAttribute="centerY" id="xRD-7Z-fAa"/>
+                    <constraint firstAttribute="trailing" secondItem="yMm-5q-gG8" secondAttribute="trailing" constant="17" id="zry-Ww-HhU"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="nHt-F2-pP7"/>
+                        <exclude reference="dEo-JM-Uj7"/>
                         <exclude reference="hVC-NA-CSl"/>
                         <exclude reference="qKy-jL-Jgx"/>
+                        <exclude reference="13o-OQ-fjX"/>
                         <exclude reference="iWL-zX-D5L"/>
+                        <exclude reference="kdx-Nh-TFq"/>
+                        <exclude reference="som-nc-XS1"/>
                         <exclude reference="76E-pj-CnS"/>
+                        <exclude reference="wXA-dj-ky9"/>
+                        <exclude reference="DMa-uV-IJs"/>
+                        <exclude reference="cgH-iy-Q6V"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

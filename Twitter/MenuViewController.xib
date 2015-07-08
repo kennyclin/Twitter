@@ -22,29 +22,34 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="o14-Tx-buU">
-                            <rect key="frame" x="0.0" y="62" width="66" height="434"/>
+                            <rect key="frame" x="0.0" y="62" width="40" height="434"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="66" id="c4Z-Q0-uUH"/>
+                                <constraint firstAttribute="width" constant="40" id="c4Z-Q0-uUH"/>
                                 <constraint firstAttribute="height" constant="434" id="pOE-of-KXd"/>
                             </constraints>
                         </tableView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xth-s9-1Ef">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xth-s9-1Ef" userLabel="ContentView">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="568" id="QuI-AI-0ZC"/>
+                                <constraint firstAttribute="width" constant="320" id="cwx-vf-8WB"/>
+                            </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="X6s-NC-cp0" appends="YES" id="lHj-8B-uVE"/>
+                                <outletCollection property="gestureRecognizers" destination="hwc-Us-rGh" appends="YES" id="E45-WI-Q6Y"/>
+                            </connections>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="xth-s9-1Ef" firstAttribute="top" secondItem="Iad-YQ-AOv" secondAttribute="top" id="9sT-cI-Psj"/>
-                        <constraint firstAttribute="bottom" secondItem="xth-s9-1Ef" secondAttribute="bottom" id="Dnj-5G-VFK"/>
                         <constraint firstItem="o14-Tx-buU" firstAttribute="leading" secondItem="Iad-YQ-AOv" secondAttribute="leading" id="FEk-o7-Vzm"/>
                         <constraint firstAttribute="centerY" secondItem="xth-s9-1Ef" secondAttribute="centerY" id="HvL-tr-pbz"/>
                         <constraint firstAttribute="centerX" secondItem="xth-s9-1Ef" secondAttribute="centerX" id="MoI-Tk-mrs"/>
                         <constraint firstAttribute="bottom" secondItem="o14-Tx-buU" secondAttribute="bottom" constant="72" id="PgT-QG-5LN"/>
                         <constraint firstItem="o14-Tx-buU" firstAttribute="top" secondItem="Iad-YQ-AOv" secondAttribute="top" constant="62" id="cxD-Zs-SJD"/>
-                        <constraint firstItem="xth-s9-1Ef" firstAttribute="leading" secondItem="Iad-YQ-AOv" secondAttribute="leading" id="kgc-Ch-Hnd"/>
-                        <constraint firstAttribute="trailing" secondItem="xth-s9-1Ef" secondAttribute="trailing" id="y90-ft-eDQ"/>
                     </constraints>
                 </view>
             </subviews>
@@ -57,8 +62,16 @@
             </constraints>
             <point key="canvasLocation" x="347" y="278"/>
         </view>
-        <swipeGestureRecognizer direction="right" id="X6s-NC-cp0" userLabel="Swipe right GR"/>
-        <swipeGestureRecognizer direction="left" id="hwc-Us-rGh"/>
+        <swipeGestureRecognizer direction="right" id="X6s-NC-cp0" userLabel="Swipe right GR">
+            <connections>
+                <action selector="didSwipeRight:" destination="-1" id="zvj-WN-nzu"/>
+            </connections>
+        </swipeGestureRecognizer>
+        <swipeGestureRecognizer direction="left" id="hwc-Us-rGh" userLabel="Swipe left GR">
+            <connections>
+                <action selector="didSwipeLeft:" destination="-1" id="K9B-Zs-YCl"/>
+            </connections>
+        </swipeGestureRecognizer>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
