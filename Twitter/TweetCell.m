@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *replyImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *retweetImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *favImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *retweetedImageView;
+@property (weak, nonatomic) IBOutlet UILabel *retweetedByLabel;
 
 /*
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageURL;
@@ -83,7 +85,8 @@
 
 - (void) profileDetected {
     NSLog(@"profile image tapped! %@", _tweetModel.user);
-    [self.delegate onProfile:_tweetModel.user];
+    User *user=_tweetModel.retweetedTweet?_tweetModel.retweetedTweet.user:_tweetModel.user;
+    [self.delegate onProfile:user];
 }
 
 -(void) retweetDetected {
@@ -96,14 +99,25 @@
 
 - (void) setTweetModel:(Tweet *)tweetModel {
     _tweetModel=tweetModel;
-    User *user=self.tweetModel.user;
+    Tweet *realTweet;
+    if (tweetModel.retweetedTweet){
+        realTweet=tweetModel.retweetedTweet;
+        self.retweetedByLabel.text=[NSString stringWithFormat:@"%@ retweeted", tweetModel.user.name];
+        [self.retweetedByLabel setHidden:NO];
+        [self.retweetedImageView setHidden:NO];
+    } else {
+        realTweet=tweetModel;
+        [self.retweetedByLabel setHidden:YES];
+        [self.retweetedImageView setHidden:YES];
+    }
+    
+    User *user=realTweet.user;
     [self.profileImageURL setImageWithURL:[NSURL URLWithString:user.profileImageUrl]];
-    self.retweetedBy.text=@"";
     self.userName.text=user.name;
     self.userAlias.text=[NSString stringWithFormat:@"@%@", user.screenname];
-    self.createTime.text=[tweetModel getDisplayTime];
-    self.text.text=tweetModel.text;
-    if (tweetModel.favorited){
+    self.createTime.text=[realTweet getDisplayTime];
+    self.text.text=realTweet.text;
+    if (realTweet.favorited){
         self.favImageView.image = [UIImage imageNamed:@"twitter-favon-icon"];
     } else {
         self.favImageView.image = [UIImage imageNamed:@"star_fav"];

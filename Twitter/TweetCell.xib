@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -65,6 +65,19 @@
                             <constraint firstAttribute="height" constant="25" id="QRd-bE-W4V"/>
                         </constraints>
                     </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter-retweet-icon" translatesAutoresizingMaskIntoConstraints="NO" id="ij1-q7-mL9" userLabel="retweeted image">
+                        <rect key="frame" x="48" y="0.0" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="Jdo-M3-8Mh"/>
+                            <constraint firstAttribute="height" constant="16" id="Lhr-J3-pmE"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="be retweeted" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1SG-cm-ynF">
+                        <rect key="frame" x="72" y="1" width="73" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Sur-lL-gcR" secondAttribute="trailing" constant="8" id="0vu-ek-EvZ"/>
@@ -73,8 +86,12 @@
                     <constraint firstItem="Sur-lL-gcR" firstAttribute="centerY" secondItem="pld-NA-JD8" secondAttribute="centerY" id="5qX-0y-Fcd"/>
                     <constraint firstItem="rzT-Sr-VQE" firstAttribute="leading" secondItem="Xbi-Vr-jgm" secondAttribute="leading" constant="8" id="9QS-ew-htB"/>
                     <constraint firstItem="JHx-5Y-kv2" firstAttribute="leading" secondItem="7XH-zu-0q9" secondAttribute="trailing" constant="65" id="CWB-vn-NSn"/>
+                    <constraint firstItem="ij1-q7-mL9" firstAttribute="top" secondItem="Xbi-Vr-jgm" secondAttribute="top" id="CyF-ck-zOm"/>
                     <constraint firstItem="7XH-zu-0q9" firstAttribute="centerY" secondItem="JHx-5Y-kv2" secondAttribute="centerY" id="DxY-oe-Bvb"/>
+                    <constraint firstItem="1SG-cm-ynF" firstAttribute="leading" secondItem="ij1-q7-mL9" secondAttribute="trailing" constant="8" id="Egg-hL-zaM"/>
+                    <constraint firstItem="ij1-q7-mL9" firstAttribute="leading" secondItem="Xbi-Vr-jgm" secondAttribute="leading" constant="48" id="FH6-Pw-be2"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="EUb-Sn-W1Q" secondAttribute="bottom" constant="5" id="IWp-pS-KJT"/>
+                    <constraint firstItem="1SG-cm-ynF" firstAttribute="leading" secondItem="ij1-q7-mL9" secondAttribute="trailing" constant="8" id="Jh3-28-yiB"/>
                     <constraint firstItem="F0Y-3e-fYx" firstAttribute="centerY" secondItem="7XH-zu-0q9" secondAttribute="centerY" id="KzK-XQ-6dZ"/>
                     <constraint firstItem="rzT-Sr-VQE" firstAttribute="top" secondItem="Xbi-Vr-jgm" secondAttribute="top" constant="19" id="Lob-Cw-2Da"/>
                     <constraint firstItem="OD5-rS-N4z" firstAttribute="leading" secondItem="rzT-Sr-VQE" secondAttribute="trailing" constant="8" id="Xsk-T7-ecD"/>
@@ -85,6 +102,8 @@
                     <constraint firstItem="JHx-5Y-kv2" firstAttribute="leading" secondItem="7XH-zu-0q9" secondAttribute="trailing" constant="65" id="c6w-27-LHv"/>
                     <constraint firstItem="F0Y-3e-fYx" firstAttribute="leading" secondItem="Xbi-Vr-jgm" secondAttribute="leading" constant="58" id="jFt-42-Yd8"/>
                     <constraint firstItem="Sur-lL-gcR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pld-NA-JD8" secondAttribute="trailing" constant="7" id="mDW-u9-6MO"/>
+                    <constraint firstItem="ij1-q7-mL9" firstAttribute="centerY" secondItem="1SG-cm-ynF" secondAttribute="centerY" id="muc-Vo-GFr"/>
+                    <constraint firstItem="rzT-Sr-VQE" firstAttribute="top" secondItem="ij1-q7-mL9" secondAttribute="bottom" constant="3" id="oEh-8r-i1p"/>
                     <constraint firstItem="F0Y-3e-fYx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="EUb-Sn-W1Q" secondAttribute="bottom" constant="3" id="q6F-N6-4gq"/>
                     <constraint firstItem="OD5-rS-N4z" firstAttribute="top" secondItem="Xbi-Vr-jgm" secondAttribute="top" constant="19" id="qLz-CM-2I4"/>
                     <constraint firstItem="EUb-Sn-W1Q" firstAttribute="top" secondItem="pld-NA-JD8" secondAttribute="bottom" constant="3" id="v7D-9e-Btn"/>
@@ -98,6 +117,8 @@
                 <outlet property="profileImageURL" destination="rzT-Sr-VQE" id="Z6s-LH-ebS"/>
                 <outlet property="replyImageView" destination="F0Y-3e-fYx" id="mke-gk-z9a"/>
                 <outlet property="retweetImageView" destination="7XH-zu-0q9" id="yPm-wI-Mbi"/>
+                <outlet property="retweetedByLabel" destination="1SG-cm-ynF" id="v3b-US-2Ob"/>
+                <outlet property="retweetedImageView" destination="ij1-q7-mL9" id="nAX-xW-IH3"/>
                 <outlet property="text" destination="EUb-Sn-W1Q" id="VOY-c5-xzH"/>
                 <outlet property="userAlias" destination="pld-NA-JD8" id="ekA-Zf-Gz0"/>
                 <outlet property="userName" destination="OD5-rS-N4z" id="gKl-2L-TgL"/>
