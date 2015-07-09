@@ -12,8 +12,9 @@
 #import "TwitterClient.h"
 #import "NewTweetController.h"
 #import "TweetDetailViewController.h"
+#import "ProfileViewController.h"
 
-@interface TweetViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TweetViewController () <UITableViewDataSource, UITableViewDelegate, TweetCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIBarButtonItem *signOutButton;
 @property (strong, nonatomic) UIBarButtonItem *myTweetButton;
@@ -93,6 +94,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TweetCell *cell=[tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     cell.tweetModel= self.homeTweets[indexPath.row];
+    cell.delegate=self;
     return cell;
 }
 
@@ -102,6 +104,12 @@
     [self.navigationItem.backBarButtonItem setTitle:@"Home"];
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)onProfile:(User *)user {
+    ProfileViewController *pvc = [[ProfileViewController alloc] init];
+    [pvc setUser:user];
+    [self.navigationController pushViewController:pvc animated:YES];
 }
 
 /*
